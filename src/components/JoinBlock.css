@@ -1,0 +1,14 @@
+.join {
+	display: flex;
+	flex-direction: column;
+}
+.join-input {
+	padding: 5px;
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+.btn-join {
+	margin-top: 5px;
+	font-size: 20px;
+	padding: 10px;
+}
