@@ -10,7 +10,7 @@ const io = require('socket.io')(server, {
 	}
 });
 app.use(express.json());
-app.use(express.static(path.join(__dirmame, 'client/build')));
+//app.use(express.static(path.join(__dirmame, 'client/build')));
 //app.use(express.urlencoded({ extended: true }));
 
 const rooms = new Map();
@@ -67,7 +67,7 @@ io.on('connection', (socket) => {
 	});
 });
 
-server.listen(9999, (error) => {
+server.listen(process.env.PORT || 9999, (error) => {
 	if (error) {
 		throw Error(error);
 	}
