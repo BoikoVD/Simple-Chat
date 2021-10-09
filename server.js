@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const server = require('http').Server(app);
 const io = require('socket.io')(server, {
 	cors: {
@@ -10,14 +11,14 @@ const io = require('socket.io')(server, {
 	}
 });
 app.use(express.json());
-app.use(express.static(path.join(__dirmame, './build')));
+app.use(express.static(path.join(__dirname, '/build')));
 //app.use(express.urlencoded({ extended: true }));
 
 const rooms = new Map();
 
 //GET_requests
 app.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname + './build/index.html'));
+	res.sendFile(path.join(__dirname + '/build/index.html'));
 });
 app.get('/rooms/:id', (req, res) => {
 	const { id: roomId } = req.params;
