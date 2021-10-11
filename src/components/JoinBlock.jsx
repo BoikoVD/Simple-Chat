@@ -21,7 +21,6 @@ function JoinBlock({ goToChat }) {
 		}
 		const obj = { roomId, userName };
 		setLoading(true)
-		console.log(roomId, userName);
 		await axios.post('/rooms', obj);
 		goToChat(obj);
 	}

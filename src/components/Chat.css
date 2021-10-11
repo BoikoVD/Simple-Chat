@@ -53,7 +53,13 @@
 	background-color: #fff;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+}
+.message-wrapper {
+	display: flex;
+	justify-content: flex-start;
+}
+.message-wrapper._this {
+	justify-content: flex-end;
 }
 .message {
 	display: flex;
@@ -65,11 +71,15 @@
 	transition: all 0.3s ease 0s;
 	background-color: #B4DCFF;
 }
+.message._this {
+	background-color: #94E49C;
+	align-items: flex-end;
+}
 .message-user {
 	margin-bottom: 5px;
 }
 .message-value {
- 	font-size: 16px;
+ 	font-size: 18px;
 }
 .form {
 	padding-top: 10px;

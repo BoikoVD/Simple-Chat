@@ -12,7 +12,6 @@ const io = require('socket.io')(server, {
 });
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '/build')));
-//app.use(express.urlencoded({ extended: true }));
 
 const rooms = new Map();
 
