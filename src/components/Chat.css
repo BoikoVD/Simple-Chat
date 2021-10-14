@@ -5,20 +5,23 @@
 }
 .chat-users {
 	flex: 1 1 30%;
-	border-right: 1px solid #000;
+	/*border-right: 1px solid #000;*/
+	max-width: 350px;
 	padding: 15px;
-	background-color: #F5F5F5;
+	background-color: #3b3d49;
 }
 .room-id {
 	font-size: 26px;
 	border-bottom: 1px solid gray;
 	padding-bottom: 10px;
+	color: #fff;
 }
 .icon-menu{
 	display: none;
 }
 .users-online {
 	margin: 10px 0 10px 0;
+	color: #fff;
 
 }
 .users {
@@ -31,11 +34,11 @@
 	padding: 10px;
 	margin: 5px 0;
 	border: 1px solid #000;
-	border-radius: 10px;
+	border-radius: 8px;
 	display: inline-flex;
 	align-items: center;
 	justify-content: flex-start;
-	background-color: #fff;
+	background-color:#e7e8ec;
 }
 
 .chat-messages {
@@ -50,7 +53,7 @@
 	
 	height: calc(100vh - 66px - 104px);
 	max-width: 100%;
-	background-color: #fff;
+	background-color: #e7e8ec;
 	display: flex;
 	flex-direction: column;
 }
@@ -58,52 +61,79 @@
 	display: flex;
 	justify-content: flex-start;
 }
-.message-wrapper._this {
-	justify-content: flex-end;
-}
+
 .message {
 	display: flex;
 	flex-direction: column;
-	padding: 10px;
+	padding: 5px;
 	margin-bottom: 10px;
-	border: 1px solid #000;
+	/*border: 1px solid #000;*/
 	border-radius: 10px;
 	transition: all 0.3s ease 0s;
-	background-color: #B4DCFF;
+	/*background-color: #B4DCFF;*/
 }
-.message._this {
-	background-color: #94E49C;
-	align-items: flex-end;
+
+.message._this .message-value {
+	background-color: #73a560;
+}
+.message._this .message-value::before {
+	border-bottom: 10px solid #73a560;
 }
 .message-user {
-	margin-bottom: 5px;
+	margin: 0px 10px 13px 10px;
 }
 .message-value {
  	font-size: 18px;
+	color: #fff;
+	background-color: #8cbaeb;
+	padding: 15px 15px;
+	border-radius: 8px;
+	position: relative;
+	z-index: 0;
+}
+.message-value::before {
+	content: "";
+	position: absolute;
+	width: 0;
+   height: 0;
+   border-left: 8px solid transparent;
+   border-right: 8px solid transparent;
+   border-bottom: 10px solid #8cbaeb;
+	top: -9px;
+	left: 8px;
 }
 .form {
 	padding-top: 10px;
 	padding: 15px;
-	border-top: 1px solid #000;
+	border-top: 2px solid #fff;
 	display: flex;
 	align-items: center;
-	background-color: #F5F5F5;
+	background-color: #e7e8ec;
 }
 .form-textarea {
 	flex: 1 1 auto;
 	padding: 7px;
 	font-size: 16px;
 	border-radius: 5px;
-	border: 1px solid black;
+	/*border: 1px solid #60606c;*/
+	border: none;
+	color: #60606c;
+}
+.form-textarea:focus {
+	outline: none !important;
+	border-color: #60606c;
+	box-shadow: 0 0 5px #60606c;
 }
 .btn-send {
-	padding: 8px;
-	margin-left: 10px;
+	padding: 15px;
+	margin-left: 30px;
+	margin-right: 10px;
 	background-color: #56A4E9;
 	transition: all 0.3s ease 0s;
 	color: #fff;
 	font-size: 20px;
 	border-radius: 5px;
+	border: none;
 }
 @media (any-hover: hover) {
 	.btn-send:hover{
@@ -115,10 +145,11 @@
 		flex-direction: column;
 	}
 	.chat-users {
+		max-width: none;
 		flex: 0 0 auto;
 		position: relative;
 		border-right: none;
-		border-bottom: 1px solid #000;
+		/*border-bottom: 1px solid #000;*/
 		display: flex;
 		align-items: center;
 	}
@@ -127,11 +158,12 @@
 		padding-bottom: 0;
 		flex: 1 1 auto;
 		position: relative;
-		z-index: 1;
+		z-index: 2;
 	}
 	.icon-menu{
 		display: block;
 		position: relative;
+		flex: 0 0 44px;
 		top: 0px;
 		right: 0px;
 		width:44px;
@@ -147,7 +179,7 @@
 		left: 0px;
 		width: 100%;
 		height: 2px;
-		background-color: #000;
+		background-color: #fff;
 	}
 	.icon-menu-arrow:first-child {
 		top: 0px;
@@ -169,6 +201,7 @@
 	}
 	.users-data {
 		position: absolute;
+		z-index: 1;
 		top: 0;
 		left: 0;
 		width: 100%;
@@ -176,7 +209,7 @@
 		opacity: 0;
 		visibility: hidden;
 		transition: all 0.3s ease 0s;
-		background-color: #F5F5F5;
+		background-color: #3b3d49;
 	}
 	.users-data._active {
 		opacity: 1;
@@ -184,7 +217,7 @@
 	}
 	.users-online {
 		margin-top: 65px;
-		border-top: 1px solid black;
+		border-top: 1px solid gray;
 		padding: 10px 10px 0 10px;
 	}
 	.user {
@@ -192,5 +225,20 @@
 	}
 	.chat-messages {
 		flex: 1 1 auto;
+	}
+	.message-wrapper._this {
+		justify-content: flex-end;
+	}
+	.message._this {
+		align-items: flex-end;
+	}
+	.message._this .message-value::before {
+		right: 8px;
+		left: auto;
+	}
+	.btn-send {
+		padding: 12px;
+		margin-left: 10px;
+		margin-right: 0px;
 	}
 }

@@ -15,7 +15,6 @@ app.use(express.static(path.join(__dirname, '/build')));
 
 const rooms = new Map();
 
-//GET_requests
 app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname + '/build/index.html'));
 });
@@ -27,8 +26,7 @@ app.get('/rooms/:id', (req, res) => {
 	} : { users: [], messages: [] };
 	res.json(obj);
 });
-//\\GET_requests
-//POST_requests
+
 app.post('/rooms', (req, res) => {
 	const { roomId, userName } = req.body;
 	if (!rooms.has(roomId)) {
@@ -39,7 +37,7 @@ app.post('/rooms', (req, res) => {
 	}
 	res.send();
 });
-//\\POST_requests
+
 
 io.on('connection', (socket) => {
 	console.log('User connected ' + socket.id);

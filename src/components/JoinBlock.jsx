@@ -27,7 +27,7 @@ function JoinBlock({ goToChat }) {
 
 	return (
 		<div className="join">
-			<input className="join-input" type="text" placeholder="Room ID" value={roomId} onChange={(e) => setRoomId(e.target.value)} />
+			<input className="join-input" type="text" placeholder="Room ID" maxlength="8" value={roomId} onChange={(e) => setRoomId(e.target.value)} />
 			<input className="join-input" type="text" placeholder="User Name" value={userName} onChange={(e) => setUserName(e.target.value)} />
 			<button className="btn-join" onClick={pressJoinButton} disabled={isLoading}><b>{isLoading ? '...' : 'Join'}</b></button>
 		</div>

@@ -1,10 +1,10 @@
 .join {
 	display: flex;
 	flex-direction: column;
-	background-color: #F5F5F5;
+	background-color: #f1f2f7;
 	padding: 35px;
 	border-radius: 5px;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 	width: 100%;
 	max-width: 350px;
 }
@@ -13,7 +13,14 @@
 	margin-bottom: 10px;
 	font-size: 20px;
 	border-radius: 5px;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
+	border: none;
+	color: #60606c;
+}
+.join-input:focus {
+	outline: none !important;
+	border-color: #60606c;
+	box-shadow: 0 0 5px #60606c;
 }
 .btn-join {
 	margin-top: 5px;
@@ -23,6 +30,7 @@
 	border-radius: 5px;
 	background-color: #56A4E9;
 	transition: all 0.3s ease 0s;
+	border: none;
 }
 @media (any-hover: hover) {
 	.btn-join:hover{
