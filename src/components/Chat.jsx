@@ -61,7 +61,7 @@ function Chat({ users, messages, userName, roomId, onAddMessage }) {
 				</div>
 				<div className="users-data" ref={userDataRef}>
 					<div className="users-online">
-						Online: ({users.length})
+						Online {users.length}:
 					</div>
 					<ul className="users">
 						{users.map((name, index) => (
