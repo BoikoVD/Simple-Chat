@@ -13,6 +13,9 @@ function Chat({ users, messages, userName, roomId, onAddMessage }) {
 
 
 	const pressSendMessage = () => {
+		if (messageValue === '') {
+			return alert('Please, enter youre message');
+		}
 		socket.emit('ROOM:NEW_MESSAGE', {
 			userName,
 			roomId,
