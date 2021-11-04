@@ -41,7 +41,10 @@
 	justify-content: flex-start;
 	background-color:#e7e8ec;
 }
-
+.user._this {
+	font-weight: 700;
+	font-size: 18px;
+}
 .chat-messages {
 	flex: 1 1 70%;
 	display: flex;

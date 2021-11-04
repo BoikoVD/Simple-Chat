@@ -36,6 +36,14 @@ function Chat({ users, messages, userName, roomId, onAddMessage }) {
 	}, []);
 
 	React.useEffect(() => {
+		for (let user of userDataRef.current.lastChild.children) {
+			if (user.innerText === userName) {
+				user.classList.add("_this");
+			}
+		}
+	}, [users]);
+
+	React.useEffect(() => {
 		messagesRef.current.scrollTo(0, 999999);
 		for (let index of messagesRef.current.children) {
 			if (index.firstChild.firstChild.innerText == userName) {
