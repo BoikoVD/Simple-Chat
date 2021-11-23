@@ -1,0 +1,22 @@
+.messageList {
+	flex: 1 1 auto;
+	overflow: auto;
+	padding: 15px;
+	//max-width: 100%;
+	//background-color: #e7e8ec;
+	//display: flex;
+	//flex-direction: column;
+	//overflow-y: auto;
+	&::-webkit-scrollbar {
+		width: 5px;
+		background-color: #fff;
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: 15px;
+		background-color: rgba(#3b3d49, 0.5);
+	}
+	&::-webkit-scrollbar-track {
+		border-radius: 10px;
+		background-color: rgba(0,0,0,0.2);
+	}
+}

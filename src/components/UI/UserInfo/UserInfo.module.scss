@@ -1,0 +1,16 @@
+.userInfo {
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	button {
+		margin-top: 10px;
+	}
+}
+.userData {
+	font-size: 18px;
+	margin-bottom: 10px;
+	font-weight: 700;
+	span {
+		color: #56A4E9;
+	}
+}

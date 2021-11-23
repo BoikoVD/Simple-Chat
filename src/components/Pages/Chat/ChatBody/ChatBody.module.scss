@@ -1,0 +1,31 @@
+.chatBody {
+	flex: 1 1 auto;
+	//overflow-y: auto;
+	
+	//height: calc(100vh - 66px - 104px);
+	max-width: 100%;
+	background-color: #e7e8ec;
+	display: flex;
+	flex-direction: column;
+}
+.chatHeader {
+	flex: 0 0 65px;
+	height: 65px;
+	border-bottom: 2px solid #fff;
+	padding-right: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.chatRoomName {
+	font-size: 26px;
+	line-height: 26px;
+	color: #3b3d49;
+	margin-bottom: 10px;
+}
+.chatRoomId {
+	font-size: 12px;
+	line-height: 12px;
+	color: rgba(#3b3d49, 0.5);
+}
