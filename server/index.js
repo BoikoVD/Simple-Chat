@@ -11,7 +11,7 @@ const Room = require('./models/roomModel');
 
 const PORT = process.env.PORT || 7000;
 const DB_URL = 'mongodb+srv://root:root@cluster0.kcqms.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-const CLIENT_URL = 'http://localhost:3000';
+const CLIENT_URL = 'https://boikovd-simple-chat.herokuapp.com';
 
 
 app.use(express.json());
