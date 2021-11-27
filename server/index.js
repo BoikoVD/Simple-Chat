@@ -15,13 +15,14 @@ const CLIENT_URL = 'https://boikovd-simple-chat.herokuapp.com';
 
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../', '/build')));
 app.use(cookieParser());
 app.use(cors({
 	credentials: true,
 	origin: CLIENT_URL
 }));
 app.use("/api", router);
+app.use(express.static(path.join(__dirname, '../', '/build')));
+app.use('*', express.static(path.join(__dirname, '../', '/build')));
 
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, '../', '/build/index.html'));
