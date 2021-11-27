@@ -15,7 +15,7 @@ const CLIENT_URL = 'http://localhost:3000';
 
 
 app.use(express.json());
-app.use(express.static(path.join('../', __dirname, '/build')));
+app.use(express.static(path.join(__dirname, '../', '/build')));
 app.use(cookieParser());
 app.use(cors({
 	credentials: true,
@@ -24,7 +24,7 @@ app.use(cors({
 app.use("/api", router);
 
 app.get('/', (req, res) => {
-	res.sendFile(path.join('../' + __dirname + '/build/index.html'));
+	res.sendFile(path.join(__dirname, '../', '/build/index.html'));
 });
 
 const start = async () => {
