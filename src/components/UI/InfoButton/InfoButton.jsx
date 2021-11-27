@@ -1,11 +1,20 @@
 import cl from './InfoButton.module.scss';
 
-const InfoButton = ({ ...props }) => {
+const InfoButton = ({ color, ...props }) => {
 
-	//console.log('Render: InfoButton');
+	const styleClass = (
+		color === "white" ? [cl.infoButton, cl.white].join(' ')
+			:
+			color === "black" ? [cl.infoButton, cl.black].join(' ')
+				:
+				cl.infoButton
+	)
+
+
+	console.log('Render: InfoButton');
 
 	return (
-		<button className={cl.infoButton} {...props}>
+		<button className={styleClass} {...props}>
 			<span></span>
 			<span></span>
 			<span></span>

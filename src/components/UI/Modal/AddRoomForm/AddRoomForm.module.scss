@@ -1,0 +1,12 @@
+.addRoomForm {
+	width: 300px;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	button {
+		margin-bottom: 15px;
+		&:last-child{
+			margin-bottom: 0px;
+		}
+	}
+}

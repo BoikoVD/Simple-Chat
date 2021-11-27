@@ -5,7 +5,7 @@ import ChatNavigation from "./ChatNavigation/ChatNavigation";
 
 function Chat() {
 
-	//console.log('Render: Chat');
+	console.log('Render: Chat');
 
 	return (
 		<div className={cl.chat}>

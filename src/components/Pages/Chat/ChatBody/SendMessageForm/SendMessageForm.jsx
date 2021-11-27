@@ -1,36 +1,47 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Button from '../../../../UI/Button/Button';
-import Textarea from '../../../../UI/Textarea/Textarea';
 import cl from './SendMessageForm.module.scss';
+import { newMessageAC } from '../../../../../store/roomsReducer';
 import socket from '../../../../../socket/socket'
-import { newMessageAC } from '../../../../../store/messagesReducer';
+import FormTextarea from '../../../../UI/Form/FormTextarea/FormTextarea';
+import FormButton from '../../../../UI/Form/FormButton/FormButton';
+import FormErrorHelp from '../../../../UI/Form/FormErrorHelp/FormErrorHelp';
 
 function SendMessageForm({ roomId }) {
 	const [messageValue, setMessageValue] = React.useState('');
+	const [error, setError] = React.useState({});
 	const userData = useSelector(state => state.user.userData);
 	const dispatch = useDispatch();
 
 	const clickOnSendMessage = (e) => {
 		e.preventDefault();
-		const message = { userId: userData._id, nickname: userData.nickname, message: messageValue }
-		socket.emit('NEW_MESSAGE', { roomId, message });
-		dispatch(newMessageAC(message));
-		setMessageValue('');
+		if (messageValue) {
+			const message = { userId: userData._id, nickname: userData.nickname, message: messageValue }
+			socket.emit('NEW_MESSAGE', { roomId, message });
+			dispatch(newMessageAC(roomId, message));
+			setMessageValue('');
+		} else {
+			setError({ msg: "Please, enter your message", param: "message" });
+		}
 	}
 
-	//console.log('Render: SendMessageForm');
+	console.log('Render: SendMessageForm');
 
 	return (
-		<form className={cl.sendMessageForm}>
-			<Textarea
-				rows="3"
-				value={messageValue}
-				onChange={e => setMessageValue(e.target.value)}
-				disabled={!roomId}
-			/>
-			<Button onClick={clickOnSendMessage} disabled={!roomId}>Send</Button>
-		</form>
+		<div className={cl.sendMessageFormWrapper}>
+			<form className={!roomId ? [cl.sendMessageForm, cl.none].join(' ') : cl.sendMessageForm}>
+				<FormTextarea
+					value={messageValue}
+					setValue={setMessageValue}
+					setError={setError}
+					valueParam="message"
+					errorParam={error.param}
+					rows="3"
+				/>
+				<FormButton onClick={clickOnSendMessage}>Send</FormButton>
+				<FormErrorHelp errorMsg={error.msg} />
+			</form>
+		</div>
 	);
 }
 

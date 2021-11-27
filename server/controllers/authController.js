@@ -35,16 +35,16 @@ class authController {
 		try {
 			let errors = validationResult(req);
 			if (!errors.isEmpty()) {
-				return res.json({ message: `Login error`, ...errors })
+				return res.json({ message: `Login ERROR`, ...errors })
 			}
 			const { email, password } = req.body;
 			const user = await User.findOne({ email });
 			if (!user) {
-				return res.json({ message: `Login error`, errors: [{ msg: `User ${email} is not registered`, param: 'email' }] })
+				return res.json({ message: `Login ERROR`, errors: [{ msg: `A user with ${email} email is not registered`, param: 'email' }] })
 			}
 			const validPassword = bcrypt.compareSync(password, user.password);
 			if (!validPassword) {
-				return res.json({ message: `Login error`, errors: [{ msg: `Entered uncorrect password`, param: 'password' }] })
+				return res.json({ message: `Login ERROR`, errors: [{ msg: `You entered an incorrect password`, param: 'password' }] })
 			}
 			res.cookie('userId', user._id, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true });
 			let rooms = [];
@@ -52,10 +52,11 @@ class authController {
 				let room = await Room.findOne({ _id: roomId });
 				rooms = [...rooms, room];
 			}
-			return res.json({ user, rooms });
+			let userObj = { _id: user._id, nickname: user.nickname, email: user.email }
+			return res.json({ user: userObj, rooms });
 		} catch (e) {
 			console.log(e);
-			res.status(400).json({ message: 'Login error' })
+			res.status(400).json({ message: 'Unforeseen Registration ERROR' })
 		}
 	}
 	async logout(req, res) {
@@ -65,7 +66,7 @@ class authController {
 			return res.json({ message: `User (id: ${userId}) is logouted` });
 		} catch (e) {
 			console.log(e);
-			res.status(400).json({ message: 'Logout error' })
+			res.status(400).json({ message: 'Logout ERROR' })
 		}
 	}
 	async checkAuth(req, res) {
@@ -73,14 +74,14 @@ class authController {
 			const { userId } = req.cookies;
 			const user = await User.findOne({ _id: userId });
 			if (!user) {
-				return res.json({ message: `User is not logined`, data: null })
+				return res.json({ message: `User is not logined`, statusCode: 0, user: null, rooms: null })
 			}
 			let rooms = [];
 			for (let roomId of user.rooms) {
 				let room = await Room.findOne({ _id: roomId });
 				rooms = [...rooms, room];
 			}
-			return res.json({ message: `User is logined`, data: { user, rooms } });
+			return res.json({ message: `User is logined`, statusCode: 1, user, rooms });
 		} catch (e) {
 			console.log(e);
 			res.status(400).json({ message: 'CheckAuth error' })

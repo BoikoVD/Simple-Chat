@@ -1,19 +1,21 @@
 import React from 'react';
-//import cl from './Registration.module.scss';
+import { useNavigate } from 'react-router-dom';
 import api from '../../../http';
-import Input from '../../UI/Input/Input';
-import Button from '../../UI/Button/Button';
-import Link from '../../UI/Link/Link';
 import Form from '../../UI/Form/Form';
-import ErrorModal from '../../UI/ErrorModal/ErrorModal';
+import FormInput from '../../UI/Form/FormInput/FormInput';
+import FormButton from '../../UI/Form/FormButton/FormButton';
+import FormErrorHelp from '../../UI/Form/FormErrorHelp/FormErrorHelp';
+import CustomLink from '../../UI/CustomLink/CustomLink';
+import Modal from '../../UI/Modal/Modal';
 
 const Registration = () => {
-	const [email, setEmail] = React.useState('');
 	const [nickname, setNickname] = React.useState('');
+	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
 	const [retPassword, setRetPassword] = React.useState('');
 	const [isLoading, setIsLoading] = React.useState(false);
 	const [error, setError] = React.useState({});
+	const navigate = useNavigate();
 
 	const clickOnRegisterBtn = async (e) => {
 		e.preventDefault();
@@ -21,56 +23,59 @@ const Registration = () => {
 		await api.post('/registration', { nickname, email, password, retPassword }).then((res) => {
 			if (res.data.errors) {
 				setError(res.data.errors[0]);
+				setIsLoading(false);
 			} else {
-				setError({});
+				navigate("complete");
 			}
 		});
-		setIsLoading(false);
 	}
 
 	console.log('Render: Registration');
 
 	return (
 		<Form>
-			<Input
-				placeholder="Nickname"
+			<FormInput
 				value={nickname}
-				onChange={e => setNickname(e.target.value)}
-				paramType="nickname"
-				errorParam={error.param}
+				setValue={setNickname}
 				setError={setError}
+				valueParam="nickname"
+				errorParam={error.param}
+				placeholder="Nickname"
+				type="text"
 			/>
-			<Input
-				placeholder="Email"
+			<FormInput
 				value={email}
-				onChange={e => setEmail(e.target.value)}
-				paramType="email"
-				errorParam={error.param}
+				setValue={setEmail}
 				setError={setError}
+				valueParam="email"
+				errorParam={error.param}
+				placeholder="Email"
+				type="text"
 			/>
-			<Input
-				placeholder="Password"
+			<FormInput
 				value={password}
-				onChange={e => setPassword(e.target.value)}
+				setValue={setPassword}
+				setError={setError}
+				valueParam="password"
+				errorParam={error.param}
+				placeholder="Password"
 				type="password"
 				autoComplete="off"
-				paramType="password"
-				errorParam={error.param}
-				setError={setError}
 			/>
-			<Input
-				placeholder="Retype password"
+			<FormInput
 				value={retPassword}
-				onChange={e => setRetPassword(e.target.value)}
+				setValue={setRetPassword}
+				setError={setError}
+				valueParam="password"
+				errorParam={error.param}
+				placeholder="Retype password"
 				type="password"
 				autoComplete="off"
-				paramType="password"
-				errorParam={error.param}
-				setError={setError}
 			/>
-			<Button onClick={clickOnRegisterBtn} disabled={isLoading}>{isLoading ? '...' : 'Register'}</Button>
-			<Link toLink="/login">Back</Link>
-			<ErrorModal error={error.msg} />
+			<FormButton onClick={clickOnRegisterBtn} disabled={isLoading}>{isLoading ? '...' : 'Register'}</FormButton>
+			<CustomLink to="/">Back</CustomLink>
+			<FormErrorHelp errorMsg={error.msg} />
+			<Modal />
 		</Form>
 	);
 }

@@ -1,11 +1,21 @@
+.messageListWrapper {
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: auto;
+}
 .messageList {
+	width: 800px;
 	flex: 1 1 auto;
 	overflow: auto;
 	padding: 15px;
+	transition: all 0.3s ease 0s;
 	//max-width: 100%;
 	//background-color: #e7e8ec;
 	//display: flex;
 	//flex-direction: column;
+	//justify-content: flex-end;
 	//overflow-y: auto;
 	&::-webkit-scrollbar {
 		width: 5px;

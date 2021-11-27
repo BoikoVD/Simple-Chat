@@ -2,13 +2,14 @@ import React from 'react';
 import { BrowserRouter } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import api from '../http';
-import { authorizationAction } from '../store/userReducer';
-import cl from './App.module.scss';
-import AppRouter from './AppRouter';
-import LoadingModal from './UI/LoadingModal/LoadingModal';
-import { updateRoomsAction } from '../store/roomsReducer';
 import socket from '../socket/socket'
-import { getMessagesAC, newMessageAC } from '../store/messagesReducer';
+import cl from './App.module.scss';
+import { authAC } from '../store/authReducer';
+import { updateUserDataAC } from '../store/userReducer';
+import { newMessageAC, updateRoomsAC } from '../store/roomsReducer';
+import { getMessagesAC } from '../store/messagesReducer';
+import AppRouter from './Router/AppRouter';
+import LoadingModal from './UI/LoadingModal/LoadingModal';
 
 function App() {
 	const [isLoading, setIsLoading] = React.useState(false);
@@ -18,21 +19,19 @@ function App() {
 		setIsLoading(true);
 		setTimeout(async () => {
 			await api.get('/check').then((res) => {
-				//console.log(res);
-				if (res.data.message === "User is logined") {
-					dispatch(authorizationAction(true, res.data.data.user));
-					dispatch(updateRoomsAction(res.data.data.rooms));
-				} else {
-					//dispatch(authorizationAction(false, res.data.data.user));
-					//dispatch(updateRoomsAction(res.data.data.rooms));
+				if (res.data.statusCode) {
+					socket.emit('JOIN', { rooms: res.data.rooms });
+					dispatch(updateUserDataAC(res.data.user));
+					dispatch(updateRoomsAC(res.data.rooms));
+					dispatch(authAC(true));
 				}
 			});
 			setIsLoading(false);
 		}, 500);
 
-		socket.on('SERVER:NEW_MESSAGE', ({ message }) => {
+		socket.on('SERVER:NEW_MESSAGE', ({ roomId, message }) => {
 			//console.log(message);
-			dispatch(newMessageAC(message));
+			dispatch(newMessageAC(roomId, message));
 		});
 		socket.on('SERVER:GET_MESSAGES', ({ messages }) => {
 			//console.log('Socket Messages ' + messages);

@@ -1,13 +1,15 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import api from '../../../http';
-import { authorizationAction } from '../../../store/userReducer';
-import Input from '../../UI/Input/Input';
-import Button from '../../UI/Button/Button';
-import Link from '../../UI/Link/Link';
+import socket from '../../../socket/socket';
+import { authAC } from '../../../store/authReducer';
+import { updateUserDataAC } from '../../../store/userReducer';
+import { updateRoomsAC } from '../../../store/roomsReducer';
+import CustomLink from '../../UI/CustomLink/CustomLink';
 import Form from '../../UI/Form/Form';
-import ErrorModal from '../../UI/ErrorModal/ErrorModal';
-import { updateRoomsAction } from '../../../store/roomsReducer';
+import FormInput from '../../UI/Form/FormInput/FormInput';
+import FormButton from '../../UI/Form/FormButton/FormButton';
+import FormErrorHelp from '../../UI/Form/FormErrorHelp/FormErrorHelp';
 
 function Login() {
 	const [email, setEmail] = React.useState('');
@@ -16,7 +18,7 @@ function Login() {
 	const [error, setError] = React.useState({});
 	const dispatch = useDispatch();
 
-	const clickOnLogIn = async (e) => {
+	const clickOnLogInBtn = async (e) => {
 		e.preventDefault();
 		setIsLoading(true);
 		await api.post('/login', { email, password }).then((res) => {
@@ -24,11 +26,10 @@ function Login() {
 				setError(res.data.errors[0]);
 				setIsLoading(false);
 			} else {
-				setError({});
-				//console.log(res.data.user);
-				//console.log(res.data.rooms);
-				dispatch(authorizationAction(true, res.data.user));
-				dispatch(updateRoomsAction(res.data.rooms));
+				socket.emit('JOIN', { rooms: res.data.rooms });
+				dispatch(updateUserDataAC(res.data.user));
+				dispatch(updateRoomsAC(res.data.rooms));
+				dispatch(authAC(true));
 			}
 		});
 	}
@@ -37,27 +38,28 @@ function Login() {
 
 	return (
 		<Form>
-			<Input
-				placeholder="Email"
+			<FormInput
 				value={email}
-				onChange={e => setEmail(e.target.value)}
-				dataType="email"
-				error={error.param}
+				setValue={setEmail}
 				setError={setError}
+				valueParam="email"
+				errorParam={error.param}
+				placeholder="Email"
+				type="text"
 			/>
-			<Input
-				placeholder="Password"
+			<FormInput
 				value={password}
-				onChange={e => setPassword(e.target.value)}
+				setValue={setPassword}
+				setError={setError}
+				valueParam="password"
+				errorParam={error.param}
+				placeholder="Password"
 				type="password"
 				autoComplete="off"
-				dataType="password"
-				error={error.param}
-				setError={setError}
 			/>
-			<Button onClick={clickOnLogIn} disabled={isLoading}>{isLoading ? '...' : 'LogIn'}</Button>
-			<Link toLink="/registration">Registration</Link>
-			<ErrorModal error={error.msg} />
+			<FormButton onClick={clickOnLogInBtn} disabled={isLoading}>{isLoading ? '...' : 'LogIn'}</FormButton>
+			<CustomLink to="/registration">Registration</CustomLink>
+			<FormErrorHelp errorMsg={error.msg} />
 		</Form>
 	);
 }

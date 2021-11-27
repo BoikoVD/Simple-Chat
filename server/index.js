@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose');
@@ -6,6 +7,7 @@ const router = require('./router/router');
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+const Room = require('./models/roomModel');
 
 const PORT = process.env.PORT || 7000;
 const DB_URL = 'mongodb+srv://root:root@cluster0.kcqms.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
@@ -13,12 +15,17 @@ const CLIENT_URL = 'http://localhost:3000';
 
 
 app.use(express.json());
+app.use(express.static(path.join('../', __dirname, '/build')));
 app.use(cookieParser());
 app.use(cors({
 	credentials: true,
 	origin: CLIENT_URL
 }));
 app.use("/api", router);
+
+app.get('/', (req, res) => {
+	res.sendFile(path.join('../' + __dirname + '/build/index.html'));
+});
 
 const start = async () => {
 	try {
@@ -33,19 +40,19 @@ const start = async () => {
 
 start();
 
-const Room = require('./models/roomModel');
-
 io.on('connection', (socket) => {
 	console.log('User connected ' + socket.id);
 
-	socket.on('JOIN', async ({ roomId, prevRoom }) => {
-		console.log('Socket JOIN ' + roomId);
-		if (prevRoom !== undefined) {
-			socket.leave(prevRoom);
+	socket.on('JOIN', async ({ rooms }) => {
+		console.log('Socket JOIN ' + rooms);
+		for (let room of rooms) {
+			socket.join(room._id);
 		}
-		const room = await Room.findOne({ _id: roomId });
+	});
+
+	socket.on('JOIN_TO_ROOM', async ({ roomId }) => {
+		console.log('Socket JOIN_TO_ROOM ' + roomId);
 		socket.join(roomId);
-		socket.emit('SERVER:GET_MESSAGES', { messages: room.messages });
 	});
 
 	socket.on('NEW_MESSAGE', async ({ roomId, message }) => {
@@ -53,7 +60,7 @@ io.on('connection', (socket) => {
 		const room = await Room.findOne({ _id: roomId });
 		room.messages = [...room.messages, message];
 		await room.save();
-		socket.to(roomId).emit('SERVER:NEW_MESSAGE', { message: message });
+		socket.to(roomId).emit('SERVER:NEW_MESSAGE', { roomId: roomId, message: message });
 	});
 
 	socket.on('disconnect', () => {

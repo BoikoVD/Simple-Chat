@@ -1,11 +1,12 @@
 .chatNav {
 	flex: 1 1 30%;
 	max-width: 350px;
-	padding: 15px;
+	padding: 15px 0 0 0;
 	background-color: #3b3d49;
 	border-right: 1px solid #e7e8ec;
 	display: flex;
 	flex-direction: column;
+	position: relative;
 }
 .userNickname {
 	flex: 0 0 50px;
@@ -15,7 +16,7 @@
 	font-size: 26px;
 	line-height: 26px;
 	border-bottom: 2px solid gray;
-	padding-bottom: 15px;
+	padding: 0 0 15px 5px;
 	color: #fff;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -27,7 +28,12 @@
 .addRoomButton {
 	display: flex;
 	justify-content: center;
-	padding-top: 15px;
-	padding-bottom: 15px;
+	border: 1px solid rgba(#3b3d49, 0.2);
+	border-radius: 50%;
+	//padding-top: 15px;
+	//padding-bottom: 15px;
 	//border-top: 1px solid gray;
+	position: absolute;
+	bottom: 25px;
+	right: 20px;
 }

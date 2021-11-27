@@ -1,0 +1,49 @@
+.room {
+	display: block;
+	width: 100%;
+	height: 75px;
+	text-align: left;
+	border: none;
+	border-radius: 5px;
+	background-color: transparent;
+	color: #fff;
+	font-size: 20px;
+	line-height: 20px;
+	padding: 10px;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+	direction: ltr;
+	&:disabled {
+		@media (any-hover: hover) {
+			&:hover{
+				background-color: #e7e8ec;
+			}
+		}
+	}
+	@media (any-hover: hover) {
+		&:hover{
+			background-color: rgba(#e7e8ec, 0.4);
+		}
+	}
+}
+.active {
+	background-color:#e7e8ec;
+	color: #3b3d49;
+}
+.roomName {
+	margin-bottom: 10px;
+}
+.lastMessage {
+	display: flex;
+	font-size: 12px;
+	line-height: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.lastMessageNickname {
+	font-weight: 700;
+}
+.lastMessageText {
+	margin-left: 5px;
+}

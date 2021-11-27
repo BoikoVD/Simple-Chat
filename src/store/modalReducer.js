@@ -1,20 +1,20 @@
 const defaultState = {
 	onModal: false,
-	modalType: '',
+	modalContent: ''
 }
 
-const ON_MODAL = 'ON_MODAL';
+const OPEN_MODAL = 'OPEN_MODAL';
 const CLOSE_MODAL = 'CLOSE_MODAL';
 
 export const modalReducer = (state = defaultState, action) => {
 	switch (action.type) {
-		case ON_MODAL:
-			return { ...state, onModal: action.onModal, modalType: action.modalType };
+		case OPEN_MODAL:
+			return { ...state, onModal: true, modalContent: action.modalContent };
 		case CLOSE_MODAL:
-			return { ...state, onModal: action.onModal };
+			return { ...state, onModal: false };
 		default: return state;
 	}
 }
 
-export const onModalAction = (onModal, modalType) => ({ type: ON_MODAL, onModal, modalType });
-export const closeModalAction = (onModal) => ({ type: CLOSE_MODAL, onModal });
+export const openModalAC = (modalContent) => ({ type: OPEN_MODAL, modalContent });
+export const closeModalAC = () => ({ type: CLOSE_MODAL });

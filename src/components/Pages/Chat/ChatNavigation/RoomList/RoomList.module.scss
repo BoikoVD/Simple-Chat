@@ -1,0 +1,38 @@
+.roomList {
+	flex: 1 1 auto;
+	padding: 15px 0;
+	overflow: auto;
+	//margin-right: -15px;
+	direction: rtl;
+	&::-webkit-scrollbar {
+		width: 5px;
+		background-color: #3b3d49;
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: 15px;
+		background-color: rgba(#e7e8ec, 0.4);
+	}
+	&::-webkit-scrollbar-track {
+		border-radius: 10px;
+		background-color: #3b3d49;
+	}
+}
+.room {
+	padding: 0 5px;
+	position: relative;
+	&::before {
+		content: '';
+		height: 1px;
+		width: 95%;
+		background-color: rgba(#e7e8ec, 0.3);
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translate(-50%, 0);
+	}
+	&:last-child {
+		&::before {
+			display: none;
+		}
+	}
+}

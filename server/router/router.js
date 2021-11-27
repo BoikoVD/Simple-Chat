@@ -11,17 +11,18 @@ router.post('/registration', [
 	check("password", "You have entered a short password, the minimum number of symbols for the password is 4").isLength({ min: 4 })
 ], authController.registration);
 router.post('/login', [
-	check("email", "Enter your email").notEmpty(),
-	check("email", "Uncorrect email").isEmail(),
+	check("email", "Please, enter your email").notEmpty(),
+	check("email", "You have entered an incorrect email").isEmail(),
 ], authController.login);
 router.post('/logout', authController.logout);
 router.get('/check', authController.checkAuth);
 
-router.post('/addroom', [
-	check("roomName", "Enter the room name").notEmpty(),
+router.post('/createroom', [
+	check("roomName", "Please, enter the room's name").notEmpty(),
 ], roomsController.createRoom);
 router.post('/findroom', [
-	check("roomId", "Enter the room Id").notEmpty(),
+	check("roomId", "Please, enter the room's Id").notEmpty(),
 ], roomsController.findRoom);
+router.post('/leaveroom', roomsController.leaveRoom);
 
 module.exports = router;
