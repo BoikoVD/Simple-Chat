@@ -37,7 +37,7 @@ function App() {
 			//console.log('Socket Messages ' + messages);
 			dispatch(getMessagesAC(messages));
 		});
-	}, [])
+	}, [dispatch])
 
 	console.log('Render: App');
 
