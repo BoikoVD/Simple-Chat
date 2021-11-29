@@ -17,7 +17,7 @@ function RoomList() {
 				}
 			}
 		}
-	}, []);
+	}, [dispatch, rooms]);
 
 	console.log('Render: RoomList');
 

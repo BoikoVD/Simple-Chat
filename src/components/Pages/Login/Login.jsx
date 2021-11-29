@@ -5,26 +5,25 @@ import socket from '../../../socket/socket';
 import { authAC } from '../../../store/authReducer';
 import { updateUserDataAC } from '../../../store/userReducer';
 import { updateRoomsAC } from '../../../store/roomsReducer';
+import { setErrorAC, setIsLoadingAC } from '../../../store/formReducer';
 import CustomLink from '../../UI/CustomLink/CustomLink';
-import Form from '../../UI/Form/Form';
-import FormInput from '../../UI/Form/FormInput/FormInput';
-import FormButton from '../../UI/Form/FormButton/FormButton';
-import FormErrorHelp from '../../UI/Form/FormErrorHelp/FormErrorHelp';
+import Form from '../../UI/FormNew/Form';
+import FormInput from '../../UI/FormNew/FormInput/FormInput';
+import FormButton from '../../UI/FormNew/FormButton/FormButton';
+import FormErrorHelp from '../../UI/FormNew/FormErrorHelp/FormErrorHelp';
 
 function Login() {
-	const [email, setEmail] = React.useState('');
-	const [password, setPassword] = React.useState('');
-	const [isLoading, setIsLoading] = React.useState(false);
-	const [error, setError] = React.useState({});
 	const dispatch = useDispatch();
 
-	const clickOnLogInBtn = async (e) => {
+	const submitForm = async (e) => {
 		e.preventDefault();
-		setIsLoading(true);
+		dispatch(setIsLoadingAC(true));
+		const email = e.target.email.value;
+		const password = e.target.password.value;
 		await api.post('/login', { email, password }).then((res) => {
 			if (res.data.errors) {
-				setError(res.data.errors[0]);
-				setIsLoading(false);
+				dispatch(setErrorAC(res.data.errors[0]));
+				dispatch(setIsLoadingAC(false));
 			} else {
 				socket.emit('JOIN', { rooms: res.data.rooms });
 				dispatch(updateUserDataAC(res.data.user));
@@ -37,29 +36,21 @@ function Login() {
 	console.log('Render: Login');
 
 	return (
-		<Form>
+		<Form autoComplete="off" onSubmit={submitForm}>
 			<FormInput
-				value={email}
-				setValue={setEmail}
-				setError={setError}
-				valueParam="email"
-				errorParam={error.param}
+				name="email"
 				placeholder="Email"
 				type="text"
 			/>
 			<FormInput
-				value={password}
-				setValue={setPassword}
-				setError={setError}
-				valueParam="password"
-				errorParam={error.param}
+				name="password"
 				placeholder="Password"
 				type="password"
 				autoComplete="off"
 			/>
-			<FormButton onClick={clickOnLogInBtn} disabled={isLoading}>{isLoading ? '...' : 'LogIn'}</FormButton>
+			<FormButton>LogIn</FormButton>
 			<CustomLink to="/registration">Registration</CustomLink>
-			<FormErrorHelp errorMsg={error.msg} />
+			<FormErrorHelp />
 		</Form>
 	);
 }

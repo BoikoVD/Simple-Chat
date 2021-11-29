@@ -9,12 +9,14 @@ function MessageList(props) {
 	const room = useSelector(state => state.rooms.rooms).find(room => room._id === activeRoom._id);
 	const messagesRef = React.useRef();
 
+	const hasMessages = room ? room.messages : null;
+
 	React.useEffect(() => {
 		messagesRef.current.scrollIntoView();
 	}, [activeRoom]);
 	React.useEffect(() => {
 		messagesRef.current.scrollIntoView({ behavior: "smooth" });
-	}, [room ? room.messages : null]);
+	}, [hasMessages]);
 
 	console.log('Render: MessageList');
 

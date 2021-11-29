@@ -1,0 +1,15 @@
+.myInput {
+	padding: 7px;
+	font-size: 20px;
+	border-radius: 5px;
+	border: 1px solid #fff;
+	color: #60606c;
+	&:focus {
+		outline: none;
+		border-color: rgba(#60606c, 0.4);
+		box-shadow: 0 0 5px #60606c;
+	}
+}
+.invalid {
+	border: 1px solid #E74C3C;
+}

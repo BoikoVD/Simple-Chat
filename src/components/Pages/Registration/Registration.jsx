@@ -1,29 +1,29 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import api from '../../../http';
-import Form from '../../UI/Form/Form';
-import FormInput from '../../UI/Form/FormInput/FormInput';
-import FormButton from '../../UI/Form/FormButton/FormButton';
-import FormErrorHelp from '../../UI/Form/FormErrorHelp/FormErrorHelp';
+import { setErrorAC, setIsLoadingAC } from '../../../store/formReducer';
+import Form from '../../UI/FormNew/Form';
+import FormInput from '../../UI/FormNew/FormInput/FormInput';
+import FormButton from '../../UI/FormNew/FormButton/FormButton';
+import FormErrorHelp from '../../UI/FormNew/FormErrorHelp/FormErrorHelp';
 import CustomLink from '../../UI/CustomLink/CustomLink';
-import Modal from '../../UI/Modal/Modal';
 
 const Registration = () => {
-	const [nickname, setNickname] = React.useState('');
-	const [email, setEmail] = React.useState('');
-	const [password, setPassword] = React.useState('');
-	const [retPassword, setRetPassword] = React.useState('');
-	const [isLoading, setIsLoading] = React.useState(false);
-	const [error, setError] = React.useState({});
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const clickOnRegisterBtn = async (e) => {
+	const submitForm = async (e) => {
 		e.preventDefault();
-		setIsLoading(true);
+		dispatch(setIsLoadingAC(true));
+		const nickname = e.target.nickname.value;
+		const email = e.target.email.value;
+		const password = e.target.password.value;
+		const retPassword = e.target.retPassword.value;
 		await api.post('/registration', { nickname, email, password, retPassword }).then((res) => {
 			if (res.data.errors) {
-				setError(res.data.errors[0]);
-				setIsLoading(false);
+				dispatch(setErrorAC(res.data.errors[0]));
+				dispatch(setIsLoadingAC(false));
 			} else {
 				navigate("complete");
 			}
@@ -33,49 +33,32 @@ const Registration = () => {
 	console.log('Render: Registration');
 
 	return (
-		<Form>
+		<Form autoComplete="off" onSubmit={submitForm}>
 			<FormInput
-				value={nickname}
-				setValue={setNickname}
-				setError={setError}
-				valueParam="nickname"
-				errorParam={error.param}
+				name="nickname"
 				placeholder="Nickname"
 				type="text"
 			/>
 			<FormInput
-				value={email}
-				setValue={setEmail}
-				setError={setError}
-				valueParam="email"
-				errorParam={error.param}
+				name="email"
 				placeholder="Email"
 				type="text"
 			/>
 			<FormInput
-				value={password}
-				setValue={setPassword}
-				setError={setError}
-				valueParam="password"
-				errorParam={error.param}
+				name="password"
 				placeholder="Password"
 				type="password"
 				autoComplete="off"
 			/>
 			<FormInput
-				value={retPassword}
-				setValue={setRetPassword}
-				setError={setError}
-				valueParam="password"
-				errorParam={error.param}
+				name="retPassword"
 				placeholder="Retype password"
 				type="password"
 				autoComplete="off"
 			/>
-			<FormButton onClick={clickOnRegisterBtn} disabled={isLoading}>{isLoading ? '...' : 'Register'}</FormButton>
+			<FormButton >Register</FormButton>
 			<CustomLink to="/">Back</CustomLink>
-			<FormErrorHelp errorMsg={error.msg} />
-			<Modal />
+			<FormErrorHelp />
 		</Form>
 	);
 }
