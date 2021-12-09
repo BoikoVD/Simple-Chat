@@ -3,10 +3,25 @@
 	max-width: 350px;
 	padding: 15px 0 0 0;
 	background-color: #3b3d49;
-	border-right: 1px solid #e7e8ec;
 	display: flex;
 	flex-direction: column;
 	position: relative;
+	@media (max-width: 992px){
+		flex: 0 0 320px;
+		max-width: none;
+		width: 320px;
+		position: absolute;
+		z-index: 5;
+		height: 100%;
+		top: 0;
+		left: -120%;
+		transition: all 0.3s;
+	}
+}
+.chatNavActive {
+	@media (max-width: 992px){
+		left: 0;
+	}
 }
 .userNickname {
 	flex: 0 0 50px;
@@ -18,9 +33,15 @@
 	border-bottom: 2px solid gray;
 	padding: 0 0 15px 5px;
 	color: #fff;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
+	@media (max-width: 480px){
+		flex: 0 0 35px;
+		height: 35px;
+	}
+	span {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 	button {
 		margin-right: 10px;
 	}
@@ -30,9 +51,6 @@
 	justify-content: center;
 	border: 1px solid rgba(#3b3d49, 0.2);
 	border-radius: 50%;
-	//padding-top: 15px;
-	//padding-bottom: 15px;
-	//border-top: 1px solid gray;
 	position: absolute;
 	bottom: 25px;
 	right: 20px;

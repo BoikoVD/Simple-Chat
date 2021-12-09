@@ -4,6 +4,9 @@
 	overflow: auto;
 	//margin-right: -15px;
 	direction: rtl;
+	@media (max-width: 480px){
+		padding: 10px 0;
+	}
 	&::-webkit-scrollbar {
 		width: 5px;
 		background-color: #3b3d49;

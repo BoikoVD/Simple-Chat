@@ -11,8 +11,8 @@ const Room = require('./models/roomModel');
 
 const PORT = process.env.PORT || 7000;
 const DB_URL = 'mongodb+srv://root:root@cluster0.kcqms.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-const CLIENT_URL = 'https://boikovd-simple-chat.herokuapp.com';
-//const CLIENT_URL = 'http://localhost:3000';
+//const CLIENT_URL = 'https://boikovd-simple-chat.herokuapp.com';
+const CLIENT_URL = 'http://localhost:3000';
 
 app.use(express.json());
 app.use(cookieParser());
@@ -21,14 +21,14 @@ app.use(cors({
 	origin: CLIENT_URL
 }));
 app.use("*/api", router);
-
+/*
 app.use(express.static(path.join(__dirname, '../', '/build')));
 app.use('*', express.static(path.join(__dirname, '../', '/build')));
 
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, '../', '/build/index.html'));
 });
-
+*/
 const start = async () => {
 	try {
 		await mongoose.connect(DB_URL);

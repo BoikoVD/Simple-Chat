@@ -4,8 +4,9 @@ import AddRoomButton from '../../../UI/Modal/AddRoomButton/AddRoomButton';
 import InfoButton from '../../../UI/InfoButton/InfoButton';
 import RoomList from './RoomList/RoomList';
 import cl from './ChatNavigation.module.scss';
+import cn from 'classnames';
 
-function ChatNavigation() {
+function ChatNavigation({ inChatNav, setInChatNav }) {
 	const userData = useSelector(state => state.user.userData);
 	const dispatch = useDispatch();
 
@@ -19,12 +20,14 @@ function ChatNavigation() {
 	console.log('Render: ChatNavigation');
 
 	return (
-		<div className={cl.chatNav}>
+		<div className={cn(cl.chatNav, {
+			[cl.chatNavActive]: inChatNav
+		})}>
 			<div className={cl.userNickname}>
 				<InfoButton onClick={clickOnInfoButton} color="white" />
-				{userData.nickname}
+				<span>{userData.nickname}</span>
 			</div>
-			<RoomList />
+			<RoomList setInChatNav={setInChatNav} inChatNav={inChatNav} />
 			<div className={cl.addRoomButton}>
 				<AddRoomButton onClick={clicOnkAddRoom} />
 			</div>

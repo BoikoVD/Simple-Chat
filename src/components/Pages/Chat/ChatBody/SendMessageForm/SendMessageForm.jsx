@@ -13,8 +13,7 @@ function SendMessageForm({ roomId }) {
 	const userData = useSelector(state => state.user.userData);
 	const dispatch = useDispatch();
 
-	const clickOnSendMessage = (e) => {
-		e.preventDefault();
+	const sendMessage = () => {
 		if (messageValue) {
 			const message = { userId: userData._id, nickname: userData.nickname, message: messageValue }
 			socket.emit('NEW_MESSAGE', { roomId, message });
@@ -22,6 +21,16 @@ function SendMessageForm({ roomId }) {
 			setMessageValue('');
 		} else {
 			setError({ msg: "Please, enter your message", param: "message" });
+		}
+	}
+	const clickOnSendMessage = (e) => {
+		e.preventDefault();
+		sendMessage();
+	}
+
+	const pressEnter = (key) => {
+		if (key.code === 'Enter') {
+			sendMessage();
 		}
 	}
 
@@ -37,6 +46,7 @@ function SendMessageForm({ roomId }) {
 					valueParam="message"
 					errorParam={error.param}
 					rows="3"
+					onKeyUp={pressEnter}
 				/>
 				<FormButton onClick={clickOnSendMessage}>Send</FormButton>
 				<FormErrorHelp errorMsg={error.msg} />

@@ -13,25 +13,30 @@
 	cursor: pointer;
 	transition: all 0.3s ease 0s;
 	direction: ltr;
-	&:disabled {
-		@media (any-hover: hover) {
-			&:hover{
-				background-color: #e7e8ec;
-			}
-		}
-	}
 	@media (any-hover: hover) {
 		&:hover{
 			background-color: rgba(#e7e8ec, 0.4);
 		}
 	}
+	@media (max-width: 480px){
+		padding: 5px;
+		height: 65px;
+	}
 }
 .active {
 	background-color:#e7e8ec;
 	color: #3b3d49;
+	@media (any-hover: hover) {
+		&:hover{
+			background-color: #e7e8ec;
+		}
+	}
 }
 .roomName {
 	margin-bottom: 10px;
+	@media (max-width: 480px){
+		margin-bottom: 5px;
+	}
 }
 .lastMessage {
 	display: flex;

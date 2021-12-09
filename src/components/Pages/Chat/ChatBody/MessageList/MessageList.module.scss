@@ -4,6 +4,8 @@
 	flex-direction: column;
 	align-items: center;
 	overflow: auto;
+	//transform: rotateY(15deg);
+	//transition: all 0.3s;
 }
 .messageList {
 	width: 800px;
@@ -17,6 +19,10 @@
 	//flex-direction: column;
 	//justify-content: flex-end;
 	//overflow-y: auto;
+	@media (max-width: 1200px){
+		width: 100%;
+		max-width: 800px;
+	}
 	&::-webkit-scrollbar {
 		width: 5px;
 		background-color: #fff;

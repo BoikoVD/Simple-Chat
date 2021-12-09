@@ -3,13 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setActiveRoomAС } from '../../../../../../store/roomsReducer';
 import cl from './Room.module.scss';
 
-function Room({ room, ...props }) {
+function Room({ room, inChatNav, setInChatNav, ...props }) {
 	const activeRoom = useSelector(state => state.rooms.activeRoom);
 	const dispatch = useDispatch();
 
 	const clickOnRoom = () => {
 		localStorage.setItem('roomId', room._id);
-		dispatch(setActiveRoomAС(room))
+		dispatch(setActiveRoomAС(room));
+		if (inChatNav) {
+			setInChatNav(false)
+		}
 	}
 
 	console.log('Render: Room');
@@ -17,7 +20,7 @@ function Room({ room, ...props }) {
 	return (
 		<button
 			className={activeRoom._id === room._id ? [cl.room, cl.active].join(' ') : cl.room}
-			disabled={activeRoom._id === room._id}
+
 			onClick={clickOnRoom}
 			{...props}
 		>

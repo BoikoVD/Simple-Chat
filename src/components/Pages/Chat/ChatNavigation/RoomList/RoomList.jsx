@@ -4,7 +4,7 @@ import { setActiveRoomAС } from '../../../../../store/roomsReducer';
 import Room from './Room/Room';
 import cl from './RoomList.module.scss';
 
-function RoomList() {
+function RoomList({ setInChatNav, inChatNav }) {
 	const rooms = useSelector(state => state.rooms.rooms);
 	const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ function RoomList() {
 	return (
 		<div className={cl.roomList}>
 			{rooms ? rooms.map(room => {
-				return <div className={cl.room} key={room._id}><Room room={room} /></div>
+				return <div className={cl.room} key={room._id}><Room room={room} inChatNav={inChatNav} setInChatNav={setInChatNav} /></div>
 			}) : null}
 		</div>
 	);

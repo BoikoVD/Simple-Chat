@@ -7,6 +7,9 @@
 	cursor: pointer;
 	transition: all 0.3s ease 0s;
 	border: none;
+	&:disabled {
+		background-color: #4C8CC4;
+	}
 	@media (any-hover: hover) {
 		&:hover{
 			background-color: #4C8CC4;
