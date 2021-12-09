@@ -47,6 +47,7 @@ function SendMessageForm({ roomId }) {
 					errorParam={error.param}
 					rows="3"
 					onKeyUp={pressEnter}
+					aria-label='enter your message'
 				/>
 				<FormButton onClick={clickOnSendMessage}>Send</FormButton>
 				<FormErrorHelp errorMsg={error.msg} />

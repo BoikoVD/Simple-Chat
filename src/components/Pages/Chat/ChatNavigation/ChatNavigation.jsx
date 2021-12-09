@@ -24,7 +24,7 @@ function ChatNavigation({ inChatNav, setInChatNav }) {
 			[cl.chatNavActive]: inChatNav
 		})}>
 			<div className={cl.userNickname}>
-				<InfoButton onClick={clickOnInfoButton} color="white" />
+				<InfoButton onClick={clickOnInfoButton} color="white" aria-label='user information' />
 				<span>{userData.nickname}</span>
 			</div>
 			<RoomList setInChatNav={setInChatNav} inChatNav={inChatNav} />

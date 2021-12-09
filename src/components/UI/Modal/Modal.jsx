@@ -27,7 +27,7 @@ function Modal() {
 						(modalContent === 'findRoom') ? <FindRoomForm /> :
 							(modalContent === 'userInfo') ? <UserInfo /> :
 								(modalContent === 'roomInfo') ? <RoomInfo /> : ''}
-				<button className={cl.close} onClick={closeModal}></button>
+				<button className={cl.close} onClick={closeModal} aria-label='close modal window'></button>
 			</div>
 		</div>
 	);

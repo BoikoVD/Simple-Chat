@@ -34,14 +34,14 @@ function ChatBody({ inChatNav, setInChatNav }) {
 			[cl.chatBodyDisabled]: inChatNav
 		})} onClick={clickOnBody}>
 			<div className={cl.chatHeaderWrapper}>
-				<Burger onClick={clickOnBurger} />
+				<Burger onClick={clickOnBurger} aria-label='open menu' />
 				<div className={!activeRoom._id ? [cl.chatHeader, cl.none].join(' ') : cl.chatHeader}>
 					<div className={cl.chatHeaderText}>
 						<div className={cl.chatRoomName}>
 							<span>{activeRoom.roomName}</span>
 						</div>
 					</div>
-					<InfoButton onClick={clickOnRoomInfoButton} color="black" />
+					<InfoButton onClick={clickOnRoomInfoButton} color="black" aria-label='room information' />
 				</div>
 			</div>
 			<MessageList />
