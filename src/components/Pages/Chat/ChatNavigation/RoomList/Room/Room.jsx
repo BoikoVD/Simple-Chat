@@ -15,8 +15,6 @@ function Room({ room, inChatNav, setInChatNav, ...props }) {
 		}
 	}
 
-	console.log('Render: Room');
-
 	return (
 		<button
 			className={activeRoom._id === room._id ? [cl.room, cl.active].join(' ') : cl.room}

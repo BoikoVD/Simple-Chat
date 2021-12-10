@@ -3,12 +3,10 @@ import { useSelector } from 'react-redux';
 import Login from '../Pages/Login/Login';
 import Registration from "../Pages/Registration/Registration";
 import Chat from "../Pages/Chat/Chat";
-import RegistrationCompleteMessage from "../Pages/Registration/RegistrationCompleteMessage/RegistrationCompleteMessage";
+import RegistrationCompleteMessage from "../Pages/RegistrationCompleteMessage/RegistrationCompleteMessage";
 
 function AppRouter() {
 	const isAuth = useSelector(state => state.auth.isAuth);
-
-	console.log('Render: AppRouter');
 
 	if (isAuth) {
 		return (

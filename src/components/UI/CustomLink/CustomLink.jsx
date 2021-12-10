@@ -4,8 +4,6 @@ import cl from './CustomLink.module.scss';
 
 function CustomLink({ children, to }) {
 
-	console.log('Render: CustomLink');
-
 	return (
 		<div className={cl.linkWrapper}>
 			<Link to={to} className={cl.link} >{children}</Link>

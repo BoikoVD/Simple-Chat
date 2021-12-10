@@ -19,8 +19,6 @@ function RoomList({ setInChatNav, inChatNav }) {
 		}
 	}, [dispatch, rooms]);
 
-	console.log('Render: RoomList');
-
 	return (
 		<div className={cl.roomList}>
 			{rooms ? rooms.map(room => {

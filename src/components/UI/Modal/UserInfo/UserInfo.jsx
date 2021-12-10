@@ -17,8 +17,6 @@ const UserInfo = () => {
 		})
 	}
 
-	//console.log('Render: UserInfo');
-
 	return (
 		<div className={cl.userInfo}>
 			<div className={cl.userData}>

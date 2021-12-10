@@ -17,8 +17,6 @@ function Modal() {
 		dispatch(closeModalAC(false));
 	}
 
-	console.log('Render: Modal');
-
 	return (
 		<div className={modal ? [cl.modal, cl.active].join(' ') : cl.modal} onClick={closeModal}>
 			<div className={cl.content} onClick={(e) => { e.stopPropagation() }}>

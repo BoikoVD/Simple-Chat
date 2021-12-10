@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import cl from './RegistrationCompleteMessage.module.scss';
-import Button from '../../../UI/Button/Button';
+import Button from '../../UI/Button/Button';
 
 const RegistrationCompleteMessage = () => {
 	const navigate = useNavigate();
@@ -9,8 +9,6 @@ const RegistrationCompleteMessage = () => {
 	const clickAction = () => {
 		navigate('/');
 	}
-
-	console.log('Render: RegistrationCompleteMessage');
 
 	return (
 		<div className={cl.message}>

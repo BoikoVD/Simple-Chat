@@ -23,8 +23,6 @@ const RoomInfo = () => {
 		setIsLoading(false);
 	}
 
-	//console.log('Render: RoomInfo');
-
 	return (
 		<div className={cl.roomInfo}>
 			<div className={cl.roomData}>

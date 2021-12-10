@@ -1,13 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import cl from './FormButton.module.scss';
 
 const FormButton = ({ children, ...props }) => {
-
-	console.log('Render: FormButton');
+	const isLoading = useSelector(state => state.form.isLoading);
 
 	return (
-		<button className={cl.myBtn} {...props}>
-			{children}
+		<button
+			className={cl.myBtn}
+			disabled={isLoading}
+			{...props}
+		>
+			{isLoading ? '...' : children}
 		</button>
 	);
 }

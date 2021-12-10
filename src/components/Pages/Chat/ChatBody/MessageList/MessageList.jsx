@@ -18,8 +18,6 @@ function MessageList(props) {
 		messagesRef.current.scrollIntoView({ behavior: "smooth" });
 	}, [hasMessages]);
 
-	console.log('Render: MessageList');
-
 	return (
 		<div className={cl.messageListWrapper} >
 			<div className={cl.messageList}  {...props}>

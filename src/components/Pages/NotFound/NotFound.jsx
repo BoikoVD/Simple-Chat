@@ -10,8 +10,6 @@ const NotFound = () => {
 		navigate(-1);
 	}
 
-	console.log('Render: NotFound');
-
 	return (
 		<div className={cl.notFound}>
 			<div className={cl.text}>404</div>

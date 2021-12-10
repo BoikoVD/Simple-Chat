@@ -39,8 +39,6 @@ function App() {
 		});
 	}, [dispatch])
 
-	console.log('Render: App');
-
 	return (
 		<BrowserRouter>
 			<div className={cl.wrapper}>

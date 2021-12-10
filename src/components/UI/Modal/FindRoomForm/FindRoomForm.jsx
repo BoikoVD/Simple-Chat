@@ -8,45 +8,38 @@ import { updateRoomsAC } from '../../../../store/roomsReducer';
 import FormInput from '../../Form/FormInput/FormInput';
 import FormButton from '../../Form/FormButton/FormButton';
 import FormErrorHelp from '../../Form/FormErrorHelp/FormErrorHelp';
+import { setErrorAC, setIsLoadingAC } from '../../../../store/formReducer';
 
 const FindRoomForm = () => {
-	const [roomId, setRoomId] = React.useState('');
-	const [isLoading, setIsLoading] = React.useState(false);
-	const [error, setError] = React.useState({});
 	const userData = useSelector(state => state.user.userData);
 	const dispatch = useDispatch();
 
-	const clickOnCreate = async (e) => {
+	const submitForm = async (e) => {
 		e.preventDefault();
-		setIsLoading(true);
+		dispatch(setIsLoadingAC(true));
+		const roomId = e.target.roomId.value;
 		await api.post('/findroom', { roomId, userId: userData._id }).then((res) => {
 			if (res.data.errors) {
-				setError(res.data.errors[0]);
+				dispatch(setErrorAC(res.data.errors[0]));
 			} else {
-				setError({});
+				dispatch(setErrorAC({}));
 				socket.emit('JOIN_TO_ROOM', { roomId });
 				dispatch(updateRoomsAC(res.data.rooms));
 				dispatch(closeModalAC());
 			}
-			setIsLoading(false);
+			dispatch(setIsLoadingAC(false));
 		});
 	}
 
-	console.log('Render: FindRoomForm');
-
 	return (
-		<form className={cl.findRoomForm}>
+		<form className={cl.findRoomForm} onSubmit={submitForm}>
 			<FormInput
-				value={roomId}
-				setValue={setRoomId}
-				setError={setError}
-				valueParam="roomId"
-				errorParam={error.param}
+				name="roomId"
 				placeholder="Room's Id"
 				type="text"
 			/>
-			<FormButton onClick={clickOnCreate} disabled={isLoading}>{isLoading ? '...' : 'Join'}</FormButton>
-			<FormErrorHelp errorMsg={error.msg} />
+			<FormButton >Join</FormButton>
+			<FormErrorHelp />
 		</form>
 	);
 }

@@ -27,14 +27,12 @@ function ChatBody({ inChatNav, setInChatNav }) {
 		}
 	}
 
-	//console.log('Render: ChatBody');
-
 	return (
 		<div className={cn(cl.chatBody, {
 			[cl.chatBodyDisabled]: inChatNav
 		})} onClick={clickOnBody}>
 			<div className={cl.chatHeaderWrapper}>
-				<Burger onClick={clickOnBurger} aria-label='open menu' />
+				<Burger onClick={clickOnBurger} />
 				<div className={!activeRoom._id ? [cl.chatHeader, cl.none].join(' ') : cl.chatHeader}>
 					<div className={cl.chatHeaderText}>
 						<div className={cl.chatRoomName}>

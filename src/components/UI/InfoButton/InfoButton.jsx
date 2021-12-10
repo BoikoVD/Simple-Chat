@@ -10,9 +10,6 @@ const InfoButton = ({ color, ...props }) => {
 				cl.infoButton
 	)
 
-
-	console.log('Render: InfoButton');
-
 	return (
 		<button className={styleClass} {...props}>
 			<span></span>

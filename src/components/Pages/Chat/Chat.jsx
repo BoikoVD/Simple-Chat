@@ -7,8 +7,6 @@ import ChatNavigation from "./ChatNavigation/ChatNavigation";
 function Chat() {
 	const [inChatNav, setInChatNav] = React.useState(true);
 
-	//console.log('Render: Chat');
-
 	return (
 		<div className={cl.chat} >
 			<ChatNavigation inChatNav={inChatNav} setInChatNav={setInChatNav} />

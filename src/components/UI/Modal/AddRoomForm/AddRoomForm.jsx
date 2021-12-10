@@ -16,8 +16,6 @@ const AddRoomForm = () => {
 		dispatch(openModalAC('findRoom'))
 	}
 
-	console.log('Render: AddRoomForm');
-
 	return (
 		<div className={cl.addRoomForm}>
 			<Button onClick={onClickCreateRoom}>Create Room</Button>

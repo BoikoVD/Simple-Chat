@@ -7,10 +7,10 @@ import { updateUserDataAC } from '../../../store/userReducer';
 import { updateRoomsAC } from '../../../store/roomsReducer';
 import { setErrorAC, setIsLoadingAC } from '../../../store/formReducer';
 import CustomLink from '../../UI/CustomLink/CustomLink';
-import Form from '../../UI/FormNew/Form';
-import FormInput from '../../UI/FormNew/FormInput/FormInput';
-import FormButton from '../../UI/FormNew/FormButton/FormButton';
-import FormErrorHelp from '../../UI/FormNew/FormErrorHelp/FormErrorHelp';
+import Form from '../../UI/Form/Form';
+import FormInput from '../../UI/Form/FormInput/FormInput';
+import FormButton from '../../UI/Form/FormButton/FormButton';
+import FormErrorHelp from '../../UI/Form/FormErrorHelp/FormErrorHelp';
 
 function Login() {
 	const dispatch = useDispatch();
@@ -32,8 +32,6 @@ function Login() {
 			}
 		});
 	}
-
-	console.log('Render: Login');
 
 	return (
 		<Form autoComplete="off" onSubmit={submitForm}>

@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import api from '../../../http';
 import { setErrorAC, setIsLoadingAC } from '../../../store/formReducer';
-import Form from '../../UI/FormNew/Form';
-import FormInput from '../../UI/FormNew/FormInput/FormInput';
-import FormButton from '../../UI/FormNew/FormButton/FormButton';
-import FormErrorHelp from '../../UI/FormNew/FormErrorHelp/FormErrorHelp';
+import Form from '../../UI/Form/Form';
+import FormInput from '../../UI/Form/FormInput/FormInput';
+import FormButton from '../../UI/Form/FormButton/FormButton';
+import FormErrorHelp from '../../UI/Form/FormErrorHelp/FormErrorHelp';
 import CustomLink from '../../UI/CustomLink/CustomLink';
 
 const Registration = () => {
@@ -29,8 +29,6 @@ const Registration = () => {
 			}
 		});
 	}
-
-	console.log('Render: Registration');
 
 	return (
 		<Form autoComplete="off" onSubmit={submitForm}>

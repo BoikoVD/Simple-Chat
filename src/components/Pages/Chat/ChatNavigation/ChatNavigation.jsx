@@ -17,8 +17,6 @@ function ChatNavigation({ inChatNav, setInChatNav }) {
 		dispatch(openModalAC('userInfo'));
 	}
 
-	console.log('Render: ChatNavigation');
-
 	return (
 		<div className={cn(cl.chatNav, {
 			[cl.chatNavActive]: inChatNav

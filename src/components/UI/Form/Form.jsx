@@ -1,11 +1,9 @@
 import cl from './Form.module.scss';
 
-const Form = ({ children }) => {
-
-	console.log('Render: Form');
+const Form = ({ children, ...props }) => {
 
 	return (
-		<form className={cl.form}>
+		<form className={cl.form} {...props}>
 			{children}
 		</form>
 	);
