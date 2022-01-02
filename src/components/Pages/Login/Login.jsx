@@ -28,6 +28,7 @@ function Login() {
 				socket.emit('JOIN', { rooms: res.data.rooms });
 				dispatch(updateUserDataAC(res.data.user));
 				dispatch(updateRoomsAC(res.data.rooms));
+				dispatch(setIsLoadingAC(false));
 				dispatch(authAC(true));
 			}
 		});

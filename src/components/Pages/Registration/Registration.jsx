@@ -25,6 +25,7 @@ const Registration = () => {
 				dispatch(setErrorAC(res.data.errors[0]));
 				dispatch(setIsLoadingAC(false));
 			} else {
+				dispatch(setIsLoadingAC(false));
 				navigate("complete");
 			}
 		});
