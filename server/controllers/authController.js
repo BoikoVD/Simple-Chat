@@ -10,7 +10,8 @@ class authController {
 			if (!errors.isEmpty()) {
 				return res.json({ message: `Registration ERROR`, ...errors })
 			}
-			const { nickname, email, password, retPassword } = req.body;
+			let { nickname, email, password, retPassword } = req.body;
+			email = email.toLowerCase();
 			if (password !== retPassword) {
 				return res.json({ message: `Registration ERROR`, errors: [{ msg: `Please enter the same passwords`, param: 'password' }] })
 			}
@@ -37,7 +38,8 @@ class authController {
 			if (!errors.isEmpty()) {
 				return res.json({ message: `Login ERROR`, ...errors })
 			}
-			const { email, password } = req.body;
+			let { email, password } = req.body;
+			email = email.toLowerCase();
 			const user = await User.findOne({ email });
 			if (!user) {
 				return res.json({ message: `Login ERROR`, errors: [{ msg: `A user with ${email} email is not registered`, param: 'email' }] })
